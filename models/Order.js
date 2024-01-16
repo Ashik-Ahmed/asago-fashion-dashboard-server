@@ -7,6 +7,8 @@ const orderSchema = mongoose.Schema({
     },
     orderNumber: {
         type: String,
+        required: true,
+        unique: true
     },
     orderItems: [
         {
@@ -92,7 +94,7 @@ const orderSchema = mongoose.Schema({
         default: 0.0
     },
 
-    shippingPrice: {
+    deliveryCharge: {
         type: Number,
         required: true,
         default: 0.0
