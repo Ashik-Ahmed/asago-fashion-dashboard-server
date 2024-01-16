@@ -30,6 +30,9 @@ const categorySchema = mongoose.Schema(
                 type: mongoose.Schema.Types.ObjectId,
             }
         ]
+    },
+    {
+        timestamps: true
     }
 )
 

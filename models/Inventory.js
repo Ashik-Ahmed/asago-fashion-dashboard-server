@@ -12,7 +12,11 @@ const inventorySchema = mongoose.Schema({
             color: String
         }
     ]
-})
+},
+    {
+        timestamps: true
+    }
+)
 
 const Inventory = mongoose.model('Inventory', inventorySchema);
 module.exports = Inventory;

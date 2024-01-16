@@ -38,13 +38,21 @@ const productSchema = mongoose.Schema({
     brand: {
         type: String
     },
+    stock: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Inventory'
+    },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Review'
         }
     ]
-})
+},
+    {
+        timestamps: true
+    }
+)
 
 
 const Product = mongoose.model('Product', productSchema);
