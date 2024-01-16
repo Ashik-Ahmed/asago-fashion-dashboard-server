@@ -1,3 +1,5 @@
+const { default: mongoose } = require("mongoose");
+
 const orderSchema = mongoose.Schema({
     orderedBy: {
         type: mongoose.Schema.Types.ObjectId,
