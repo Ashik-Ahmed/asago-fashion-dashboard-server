@@ -14,9 +14,11 @@ app.get('/', (req, res) => {
 })
 
 const userRoute = require('./routes/user.route');
+const categoryRoute = require('./routes/category.route');
 
 
 app.use('/api/v1/user', userRoute);
+app.use('/api/v1/category', categoryRoute);
 
 
 module.exports = app;
