@@ -3,7 +3,9 @@ const { default: mongoose } = require("mongoose");
 const inventorySchema = mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true
     },
+
     stock: [
         {
             size: String,

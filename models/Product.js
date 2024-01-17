@@ -3,28 +3,31 @@ const { default: mongoose } = require("mongoose");
 const productSchema = mongoose.Schema({
     title: {
         type: String,
+        required: true
     },
     description: {
         type: String,
+        required: true
     },
     SKU: {
         type: String
     },
     price: {
-        type: Number
+        type: Number,
+        required: true
     },
     isActive: {
         type: Boolean,
+        default: true
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
-    },
-    inventory: {
-        type: mongoose.Schema.Types.ObjectId,
+        required: true
     },
     images: {
         titleImage: String,
-        allImage: Array
+        allImage: Array,
+        required: true
     },
     tags: {
         type: Array
@@ -40,7 +43,8 @@ const productSchema = mongoose.Schema({
     },
     stock: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Inventory'
+        ref: 'Inventory',
+        reruired: true
     },
     reviews: [
         {

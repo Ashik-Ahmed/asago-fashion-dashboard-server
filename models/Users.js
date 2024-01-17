@@ -11,6 +11,7 @@ const userSchema = mongoose.Schema(
         userId: {
             type: Number,
             unique: [true, 'Duplicate User ID'],
+            required: [true, 'User ID is required'],
         },
         email: {
             type: String,
@@ -43,6 +44,7 @@ const userSchema = mongoose.Schema(
             type: String,
             enum: ['Super Admin', 'Admin'],
             default: 'Employee',
+            required: true
         },
 
         firstName: {
