@@ -17,12 +17,14 @@ const userRoute = require('./routes/user.route');
 const categoryRoute = require('./routes/category.route');
 const inventoryRoute = require('./routes/inventory.route');
 const orderRoute = require('./routes/order.route');
+const productRoute = require('./routes/product.route');
 
 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/category', categoryRoute);
 app.use('/api/v1/inventory', inventoryRoute);
 app.use('/api/v1/order', orderRoute);
+app.use('/api/v1/product', productRoute);
 
 
 module.exports = app;
