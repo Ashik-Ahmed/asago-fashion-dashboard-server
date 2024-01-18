@@ -75,3 +75,54 @@ exports.getAllUsers = async (req, res) => {
         })
     }
 }
+
+
+exports.login = async (req, res) => {
+    try {
+
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(401).json({
+                status: 'fail',
+                error: 'please provide email and password'
+            })
+        }
+
+        const user = await findUserByEmail(email);
+
+        if (!user) {
+            return res.status(401).json({
+                status: 'fail',
+                error: 'No user found'
+            })
+        }
+
+        const isPasswordMatched = user.comparePassword(password, user.password);
+
+        if (!isPasswordMatched) {
+            return res.status(403).json({
+                status: 'fail',
+                error: 'Password is not correct'
+            })
+        }
+
+        const token = generateToken(user);
+        const { password: pwd, ...others } = user.toObject();
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Successfully logged in',
+            data: {
+                user: others,
+                token
+            }
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            status: 'failed',
+            error: 'Internal server error ',
+        })
+    }
+}
