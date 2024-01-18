@@ -1,4 +1,4 @@
-const { createUserService } = require("../services/user.service");
+const { createUserService, getUserByIdService } = require("../services/user.service");
 
 exports.createUser = async (req, res) => {
     try {
@@ -19,6 +19,32 @@ exports.createUser = async (req, res) => {
             })
         }
     } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getUserById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await getUserByIdService(id)
+
+        if (user) {
+            res.status(200).json({
+                status: 'Success',
+                data: user
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'User not found'
+            })
+        }
+    }
+    catch (error) {
         res.status(500).json({
             status: 'Failed',
             error: error.message

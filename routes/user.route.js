@@ -9,5 +9,8 @@ router.route("/")
         res.json("hello user api endpoint")
     })
 
+router.route('/:id')
+    .get(userController.getUserById)
+
 
 module.exports = router;

@@ -6,3 +6,9 @@ exports.createUserService = async (userData) => {
 
     return user;
 }
+
+exports.getUserByIdService = async (userId) => {
+    const user = await User.findById(userId);
+    // console.log(user);
+    return user;
+}
