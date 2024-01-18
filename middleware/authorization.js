@@ -1,6 +1,7 @@
 
 module.exports = (...role) => {
     return (req, res, next) => {
+
         const userRole = req.user.role;
 
         if (!role.includes(userRole)) {
@@ -9,7 +10,6 @@ module.exports = (...role) => {
                 error: 'Unauthorized access!'
             })
         }
-
         next();
     }
 }

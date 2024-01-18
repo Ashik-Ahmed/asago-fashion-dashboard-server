@@ -1,4 +1,5 @@
 const { createUserService, getUserByEmailService, getAllUserService } = require("../services/user.service");
+const { generateToken } = require("../utils/generateToken");
 
 exports.createUser = async (req, res) => {
     try {
@@ -89,8 +90,8 @@ exports.login = async (req, res) => {
             })
         }
 
-        const user = await findUserByEmail(email);
-
+        const user = await getUserByEmailService(email);
+        // console.log(user);
         if (!user) {
             return res.status(401).json({
                 status: 'fail',
@@ -122,7 +123,7 @@ exports.login = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 'failed',
-            error: 'Internal server error ',
+            error: error.message,
         })
     }
 }
