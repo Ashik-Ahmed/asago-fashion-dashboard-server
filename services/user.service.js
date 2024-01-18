@@ -12,3 +12,8 @@ exports.getUserByEmailService = async (userEmail) => {
     // console.log(user);
     return user;
 }
+
+exports.getAllUserService = async () => {
+    const users = await User.find();
+    return users;
+}

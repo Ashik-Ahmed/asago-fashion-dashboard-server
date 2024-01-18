@@ -1,4 +1,4 @@
-const { createUserService, getUserByEmailService } = require("../services/user.service");
+const { createUserService, getUserByEmailService, getAllUserService } = require("../services/user.service");
 
 exports.createUser = async (req, res) => {
     try {
@@ -45,6 +45,30 @@ exports.getUserById = async (req, res) => {
         }
     }
     catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await getAllUserService();
+
+        if (users) {
+            res.status(200).json({
+                status: 'Success',
+                data: users
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'No user found'
+            })
+        }
+    } catch (error) {
         res.status(500).json({
             status: 'Failed',
             error: error.message

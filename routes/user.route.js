@@ -6,9 +6,7 @@ const router = express.Router();
 
 router.route("/")
     .post(userController.createUser)
-    .get((req, res) => {
-        res.json("hello user api endpoint")
-    })
+    .get(userController.getAllUsers)
 
 router.route('/:email')
     .get(userController.getUserById)
