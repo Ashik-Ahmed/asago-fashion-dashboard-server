@@ -1,5 +1,6 @@
 const express = require("express")
 const userController = require("../controllers/user.controller.js");
+const authorization = require("../middleware/authorization.js");
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.route("/")
         res.json("hello user api endpoint")
     })
 
-router.route('/:id')
+router.route('/:email')
     .get(userController.getUserById)
 
 

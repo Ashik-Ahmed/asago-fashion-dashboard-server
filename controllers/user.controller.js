@@ -1,4 +1,4 @@
-const { createUserService, getUserByIdService } = require("../services/user.service");
+const { createUserService, getUserByEmailService } = require("../services/user.service");
 
 exports.createUser = async (req, res) => {
     try {
@@ -28,8 +28,8 @@ exports.createUser = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
     try {
-        const { id } = req.params;
-        const user = await getUserByIdService(id)
+        const { email } = req.params;
+        const user = await getUserByEmailService(email)
 
         if (user) {
             res.status(200).json({
