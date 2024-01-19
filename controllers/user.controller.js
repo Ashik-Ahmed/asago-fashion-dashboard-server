@@ -127,3 +127,22 @@ exports.login = async (req, res) => {
         })
     }
 }
+
+// get logged in user 
+exports.getLoggedInUser = async (req, res) => {
+    try {
+
+        const user = await getUserByEmailService(req.user?.email);
+        const { password, ...others } = user.toObject();
+
+        res.status(200).json({
+            status: 'success',
+            user: others
+        })
+    } catch (error) {
+        res.status(403).json({
+            status: 'failed',
+            error: 'Invalid Token',
+        })
+    }
+}
