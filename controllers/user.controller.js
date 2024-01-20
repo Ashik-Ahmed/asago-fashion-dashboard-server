@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
     }
 }
 
-exports.getUserById = async (req, res) => {
+exports.getUserByEmail = async (req, res) => {
     try {
         const { email } = req.params;
         const user = await getUserByEmailService(email)
