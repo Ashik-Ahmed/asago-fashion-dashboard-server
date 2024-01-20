@@ -17,3 +17,9 @@ exports.getAllUserService = async () => {
     const users = await User.find();
     return users;
 }
+
+exports.deleteUserByEmailService = async (userEmail) => {
+    const result = await User.deleteOne({ email: userEmail });
+
+    return result;
+}

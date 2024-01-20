@@ -1,4 +1,4 @@
-const { createUserService, getUserByEmailService, getAllUserService } = require("../services/user.service");
+const { createUserService, getUserByEmailService, getAllUserService, deleteUserByEmailService } = require("../services/user.service");
 const { generateToken } = require("../utils/generateToken");
 
 exports.createUser = async (req, res) => {
@@ -143,6 +143,33 @@ exports.getLoggedInUser = async (req, res) => {
         res.status(403).json({
             status: 'failed',
             error: 'Invalid Token',
+        })
+    }
+}
+
+
+exports.deleteUserByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+        // const user = await getUserByEmailService(email);
+        const result = await deleteUserByEmailService(email);
+        if (result?.deletedCount > 0) {
+            res.status(200).json({
+                status: 'Success',
+                message: 'User deleted successfully'
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'No user found'
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
         })
     }
 }

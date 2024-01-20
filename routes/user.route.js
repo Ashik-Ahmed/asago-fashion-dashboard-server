@@ -13,7 +13,8 @@ router.route("/")
     .get(verifyToken, authorization("Admin"), userController.getAllUsers)
 
 router.route('/:email')
-    .get(userController.getUserByEmail)
+    .get(verifyToken, userController.getUserByEmail)
+    .delete(verifyToken, authorization("Admin"), userController.deleteUserByEmail)
 
 
 module.exports = router;
