@@ -4,6 +4,7 @@ const categorySchema = mongoose.Schema(
     {
         categoryName: {
             type: String,
+            unique: true,
             required: true
         },
         description: {
@@ -14,6 +15,10 @@ const categorySchema = mongoose.Schema(
         },
         status: {
             type: String,
+        },
+        parentCategory: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category'
         },
         subCategories: [
             {
