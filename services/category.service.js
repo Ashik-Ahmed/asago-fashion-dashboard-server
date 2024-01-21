@@ -7,7 +7,7 @@ exports.createNewCategoryService = async (categoryData) => {
     if (categoryData?.parentCategory) {
         const pushToParentCategory = await Category.updateOne(
             { _id: categoryData.parentCategory },
-            { $push: { subCategories: category._id } }
+            { $push: { subCategories: { categoryId: category._id, categoryName: category.categoryName } } }
         );
 
         if (pushToParentCategory.nModified === 0) {
