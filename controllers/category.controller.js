@@ -78,6 +78,18 @@ exports.getCategoryById = async (req, res) => {
 exports.getAllCategories = async (req, res) => {
     try {
         const categories = await getAllCategoriesService();
+        if (categories?.length > 0) {
+            res.status(200).json({
+                status: 'Success',
+                data: categories
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'No Category found'
+            })
+        }
     } catch (error) {
         res.status(500).json({
             status: 'Failed',
