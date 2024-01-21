@@ -27,8 +27,21 @@ exports.getCategoryByIdService = async (categoryId) => {
 
 exports.deleteCategoryByIdService = async (categoryId) => {
     const deleteCategory = await Category.deleteOne({ _id: categoryId });
+    console.log(deleteCategory);
     if (deleteCategory.deletedCount > 0) {
-        await Category.updateMany({ parentCategory: categoryId }, { $pull: { parentCategory: categoryId } });
+        const removeFromSubCategories = await Category.updateMany(
+            {},
+            {
+                $pull: {
+                    subCategories: { categoryId },
+                },
+            },
+            { multi: true }
+        );
+
+        if (removeFromSubCategories.modifiedCount == 0) {
+            return null;
+        }
     }
     return deleteCategory;
 }
