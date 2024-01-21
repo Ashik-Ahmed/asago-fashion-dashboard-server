@@ -1,4 +1,4 @@
-const { createNewCategoryService, deleteCategoryByIdService, getCategoryByIdService } = require("../services/category.service");
+const { createNewCategoryService, deleteCategoryByIdService, getCategoryByIdService, getAllCategoriesService } = require("../services/category.service");
 
 exports.createNewCategory = async (req, res) => {
     try {
@@ -67,6 +67,17 @@ exports.getCategoryById = async (req, res) => {
             })
         }
 
+    } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getAllCategories = async (req, res) => {
+    try {
+        const categories = await getAllCategoriesService();
     } catch (error) {
         res.status(500).json({
             status: 'Failed',

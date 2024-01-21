@@ -25,6 +25,11 @@ exports.getCategoryByIdService = async (categoryId) => {
     return category;
 }
 
+exports.getAllCategoriesService = async () => {
+    const categories = await Category.find({});
+    return categories;
+}
+
 exports.deleteCategoryByIdService = async (categoryId) => {
     const deleteCategory = await Category.deleteOne({ _id: categoryId });
     console.log(deleteCategory);
