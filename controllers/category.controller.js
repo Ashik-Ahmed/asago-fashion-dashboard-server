@@ -49,6 +49,32 @@ exports.getCategoryById = async (req, res) => {
     }
 }
 
+exports.getCategoryById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const category = await getCategoryByIdService(id);
+
+        if (category?._id) {
+            res.status(200).json({
+                status: 'Success',
+                data: category
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'No Category found'
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
 exports.deleteCategoryById = async (req, res) => {
     try {
         const { id } = req.params;
