@@ -25,9 +25,10 @@ const categorySchema = mongoose.Schema(
                 categoryName: {
                     type: String,
                 },
-                parentCategory: {
+                categoryId: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Category'
+                    ref: 'Category',
+                    required: true
                 }
             }
         ],
