@@ -26,7 +26,7 @@ exports.getCategoryByIdService = async (categoryId) => {
 }
 
 exports.getAllCategoriesService = async () => {
-    const categories = await Category.find({});
+    const categories = await Category.find({ parentCategory: null });
     return categories;
 }
 
