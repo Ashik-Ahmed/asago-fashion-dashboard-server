@@ -26,7 +26,21 @@ exports.getCategoryByIdService = async (categoryId) => {
 }
 
 exports.getAllCategoriesService = async () => {
-    const categories = await Category.find({ parentCategory: null });
+    const categories = await Category.find(
+        { parentCategory: null },
+        { categoryName: 1, subCategories: 1 }
+    ).populate({
+        path: 'subCategories.categoryId',
+        select: 'subCategories',
+        populate: {
+            path: 'subCategories.categoryId',
+            select: 'subCategories',
+            populate: {
+                path: 'subCategories.categoryId',
+                select: 'subCategories'
+            }
+        },
+    });
     return categories;
 }
 
