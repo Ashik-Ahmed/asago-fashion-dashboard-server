@@ -37,10 +37,15 @@ exports.getAllCategoriesService = async () => {
             select: 'subCategories',
             populate: {
                 path: 'subCategories.categoryId',
-                select: 'subCategories'
-            }
+                select: 'subCategories',
+                populate: {
+                    path: 'subCategories.categoryId',
+                    select: 'subCategories'
+                }
+            },
         },
-    });
+    },
+    );
     return categories;
 }
 
