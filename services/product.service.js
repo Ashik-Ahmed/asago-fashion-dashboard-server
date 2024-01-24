@@ -16,3 +16,13 @@ exports.createNewProductService = async (productData) => {
     }
     return newProduct;
 }
+
+exports.getProductByIdService = async (productId) => {
+    const product = await Product.findOne({ _id: productId });
+    return product;
+}
+
+exports.deleteProductByIdService = async (productId) => {
+    const deleteProduct = await Product.deleteOne({ _id: productId });
+    return deleteProduct;
+}
