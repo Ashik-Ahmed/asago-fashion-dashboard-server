@@ -3,15 +3,26 @@ const { default: mongoose } = require("mongoose");
 const inventorySchema = mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'Product'
     },
 
     stock: [
         {
-            size: String,
-            quantity: Number,
-            price: Number,
-            color: String
+            size: {
+                type: String,
+            },
+            quantity: {
+                type: Number,
+                required: true
+            },
+            price: {
+                type: Number,
+                required: true
+            },
+            color: {
+                type: String
+            }
         }
     ]
 },

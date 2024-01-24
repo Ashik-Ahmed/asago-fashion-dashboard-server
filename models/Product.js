@@ -7,27 +7,36 @@ const productSchema = mongoose.Schema({
     },
     description: {
         type: String,
+        trim: true,
         required: true
     },
-    SKU: {
-        type: String
-    },
-    price: {
-        type: Number,
+    sku: {
+        type: String,
         required: true
     },
+    // price: {
+    //     type: Number,
+    //     required: true
+    // },
     isActive: {
         type: Boolean,
-        default: true
+        default: true,
+        required: true
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
         required: true
     },
     images: {
-        titleImage: String,
-        allImage: Array,
-        required: true
+        titleImage: {
+            type: String,
+            required: true
+        },
+        allImage: {
+            type: Array,
+            required: true
+        }
     },
     tags: {
         type: Array
@@ -41,11 +50,11 @@ const productSchema = mongoose.Schema({
     brand: {
         type: String
     },
-    stock: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Inventory',
-        reruired: true
-    },
+    // inventory: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Inventory',
+    //     reruired: true
+    // },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,

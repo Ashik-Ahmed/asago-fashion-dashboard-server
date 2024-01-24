@@ -1,10 +1,9 @@
 const express = require('express');
+const productController = require('../controllers/product.controller');
 
 const router = express.Router();
 
 router.route('/')
-    .get((req, res) => {
-        res.json("hello product api endpoint")
-    })
+    .post(productController.createNewProduct)
 
 module.exports = router;
