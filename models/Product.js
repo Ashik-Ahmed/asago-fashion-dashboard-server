@@ -3,6 +3,8 @@ const { default: mongoose } = require("mongoose");
 const productSchema = mongoose.Schema({
     title: {
         type: String,
+        trim: true,
+        unique: true,
         required: true
     },
     description: {
@@ -12,6 +14,7 @@ const productSchema = mongoose.Schema({
     },
     sku: {
         type: String,
+        unique: true,
         required: true
     },
     // price: {
