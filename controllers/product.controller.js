@@ -1,4 +1,4 @@
-const { createNewProductService, deleteProductByIdService } = require("../services/product.service");
+const { createNewProductService, deleteProductByIdService, getProductByIdService } = require("../services/product.service");
 
 exports.createNewProduct = async (req, res) => {
     try {
@@ -38,9 +38,26 @@ exports.getProductById = async (req, res) => {
 exports.deleteProductById = async (req, res) => {
     try {
         const { id } = req.params;
-        const deleteProduct = await deleteProductByIdService(id);
-        console.log(deleteProduct);
-        if (deleteProduct?.deletedCount > 0) {
+        const product = await getProductByIdService(id);
+        if (product?._id) {
+            const deleteProduct = await deleteProductByIdService(id);
+
+            const removeProductFromCategory = await Category.updateOne({ _id: deleteProduct?.category }, { $pull: { products: deleteProduct?._id } });
+
+            console.log(removeProductFromCategory);
+
+            if (removeProductFromCategory.nModified === 0) {
+                res.status(400).json({
+                    status: 'Failed',
+                    error: 'Product not removed from category'
+                })
+            }
+            else {
+                res.status(200).json({
+                    status: 'Success',
+                    data: deleteProduct
+                })
+            }
             res.status(200).json({
                 status: 'Success',
                 data: deleteProduct
@@ -48,7 +65,7 @@ exports.deleteProductById = async (req, res) => {
         } else {
             res.status(400).json({
                 status: 'Failed',
-                error: 'Product not deleted'
+                error: 'No product found'
             })
         }
     } catch (error) {
