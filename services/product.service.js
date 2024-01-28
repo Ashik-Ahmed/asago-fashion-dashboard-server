@@ -22,6 +22,11 @@ exports.getProductByIdService = async (productId) => {
     return product;
 }
 
+exports.getAllProductsService = async () => {
+    const products = await Product.find();
+    return products;
+}
+
 exports.deleteProductByIdService = async (productId) => {
     const deleteProduct = await Product.deleteOne({ _id: productId });
     return deleteProduct;
