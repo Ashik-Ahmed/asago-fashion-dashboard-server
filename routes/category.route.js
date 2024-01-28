@@ -1,14 +1,16 @@
 const express = require('express');
 const categoryController = require('../controllers/category.controller');
+const verifyToken = require('../middleware/verifyToken');
+const authorization = require('../middleware/authorization');
 
 const router = express.Router();
 
 router.route('/')
-    .post(categoryController.createNewCategory)
+    .post(verifyToken, authorization("Admin"), categoryController.createNewCategory)
     .get(categoryController.getAllCategories)
 
 router.route('/:id')
     .get(categoryController.getCategoryById)
-    .delete(categoryController.deleteCategoryById)
+    .delete(verifyToken, authorization("Admin"), categoryController.deleteCategoryById)
 
 module.exports = router;
