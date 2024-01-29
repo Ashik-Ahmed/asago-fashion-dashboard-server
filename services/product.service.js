@@ -24,7 +24,7 @@ exports.getProductByIdService = async (productId) => {
 
 exports.getAllProductsService = async () => {
     const products = await Product.find({});
-    console.log(products);
+
     return products;
 }
 
