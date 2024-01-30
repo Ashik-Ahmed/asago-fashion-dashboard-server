@@ -28,6 +28,11 @@ exports.getAllProductsService = async () => {
     return products;
 }
 
+exports.updateProductByIdService = async (productId, productData) => {
+    const updateProduct = await Product.updateOne({ _id: productId }, { $set: productData });
+    return updateProduct;
+}
+
 exports.deleteProductByIdService = async (productId) => {
     const deleteProduct = await Product.deleteOne({ _id: productId });
     return deleteProduct;
