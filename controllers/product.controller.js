@@ -26,7 +26,19 @@ exports.createNewProduct = async (req, res) => {
 
 exports.getProductById = async (req, res) => {
     try {
-
+        const { id } = req.params;
+        const product = await getProductByIdService(id);
+        if (product?._id) {
+            res.status(200).json({
+                status: 'Success',
+                data: product
+            })
+        } else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'Product not found'
+            })
+        }
     } catch (error) {
         res.status(500).json({
             status: 'Failed',
