@@ -11,7 +11,7 @@ router.route('/')
 
 router.route('/:id')
     .get(productController.getProductById)
-    .patch(productController.updateProductById)
+    .patch(verifyToken, authorization("Admin"), productController.updateProductById)
     .delete(verifyToken, authorization("Admin"), productController.deleteProductById)
 
 module.exports = router;
