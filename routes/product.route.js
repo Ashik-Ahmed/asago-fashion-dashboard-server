@@ -5,6 +5,9 @@ const verifyToken = require("../middleware/verifyToken.js");
 
 const router = express.Router();
 
+router.route("/slug/:slug")
+    .get(productController.getProductBySlug)
+
 router.route('/')
     .get(productController.getAllProducts)
     .post(verifyToken, authorization("Admin"), productController.createNewProduct)

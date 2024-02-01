@@ -1,4 +1,4 @@
-const { createNewProductService, deleteProductByIdService, getProductByIdService, getAllProductsService, updateProductByIdService } = require("../services/product.service");
+const { createNewProductService, deleteProductByIdService, getProductByIdService, getAllProductsService, updateProductByIdService, getProductBySlugService } = require("../services/product.service");
 
 exports.createNewProduct = async (req, res) => {
     try {
@@ -39,6 +39,31 @@ exports.getProductById = async (req, res) => {
                 error: 'Product not found'
             })
         }
+    } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getProductBySlug = async (req, res) => {
+    try {
+        const { slug } = req.params;
+        const product = await getProductBySlugService(slug);
+        if (product?._id) {
+            res.status(200).json({
+                status: 'Success',
+                data: product
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'Product not found'
+            })
+        }
+
     } catch (error) {
         res.status(500).json({
             status: 'Failed',

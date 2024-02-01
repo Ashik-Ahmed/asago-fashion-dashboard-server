@@ -22,6 +22,11 @@ exports.getProductByIdService = async (productId) => {
     return product;
 }
 
+exports.getProductBySlugService = async (slug) => {
+    const product = await Product.findOne({ slug });
+    return product;
+}
+
 exports.getAllProductsService = async () => {
     const products = await Product.find({});
 
