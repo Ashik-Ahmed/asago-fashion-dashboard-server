@@ -7,6 +7,11 @@ const productSchema = mongoose.Schema({
         unique: true,
         required: true
     },
+    slug: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     description: {
         type: String,
         trim: true,
@@ -70,6 +75,13 @@ const productSchema = mongoose.Schema({
     }
 )
 
+productSchema.pre('save', function (next) {
+    if (!this.isModified('title')) {
+        return next();
+    }
+    this.slug = this.title.toLowerCase().replace(/\s+/g, '-');
+    next();
+});
 
 const Product = mongoose.model('Product', productSchema);
 module.exports = Product;
