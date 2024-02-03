@@ -1,5 +1,5 @@
 const Order = require("../models/Order");
-const { getAllOrdersService } = require("../services/order.service");
+const { getAllOrdersService, getOrderByIdService } = require("../services/order.service");
 
 exports.createNewOrder = async (req, res) => {
     try {
@@ -20,6 +20,33 @@ exports.createNewOrder = async (req, res) => {
         }
 
     } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getOrderById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        // console.log(id);
+        const order = await getOrderByIdService(id);
+        // console.log(order);
+        if (order?._id) {
+            res.status(200).json({
+                status: 'Success',
+                data: order
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'Order not found'
+            })
+        }
+    }
+    catch (error) {
         res.status(500).json({
             status: 'Failed',
             error: error.message

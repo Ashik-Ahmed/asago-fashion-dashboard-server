@@ -5,6 +5,11 @@ exports.createNewOrderService = async (orderData) => {
     return newOrder;
 }
 
+exports.getOrderByIdService = async (orderId) => {
+    const order = await Order.findOne({ _id: orderId });
+    return order;
+}
+
 exports.getAllOrdersService = async () => {
     const orders = await Order.find({});
     return orders;
