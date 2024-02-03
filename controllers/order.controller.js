@@ -81,8 +81,8 @@ exports.getAllOrders = async (req, res) => {
 
 exports.getMyOrders = async (req, res) => {
     try {
-        const myOrders = await getMyOrdersService(req.user.email);
-        console.log(myOrders);
+        const myOrders = await getMyOrdersService(req?.user?.email);
+
         if (myOrders.length > 0) {
             res.status(200).json({
                 status: 'Success',

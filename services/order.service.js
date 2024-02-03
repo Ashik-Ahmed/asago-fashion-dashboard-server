@@ -16,7 +16,6 @@ exports.getAllOrdersService = async () => {
 }
 
 exports.getMyOrdersService = async (customerEmail) => {
-    console.log(customerEmail);
     const orders = await Order.find({ customerEmail });
     return orders;
 }
