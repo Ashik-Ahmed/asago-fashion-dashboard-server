@@ -3,11 +3,13 @@ const { default: mongoose } = require("mongoose");
 const orderSchema = mongoose.Schema({
     orderedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer'
+        ref: 'Customer',
+        required: true
     },
     orderNumber: {
         type: String,
         required: true,
+        trim: true,
         unique: true
     },
     orderItems: [
