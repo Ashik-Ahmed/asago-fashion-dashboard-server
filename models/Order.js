@@ -1,10 +1,15 @@
 const { default: mongoose } = require("mongoose");
 
 const orderSchema = mongoose.Schema({
-    orderedBy: {
-        type: mongoose.Schema.Types.ObjectId,
+    // orderedBy: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Customer',
+    //     required: true
+    // },
+    customerEmail: {
+        type: String,
         ref: 'Customer',
-        required: true
+        required: true,
     },
     orderNumber: {
         type: String,

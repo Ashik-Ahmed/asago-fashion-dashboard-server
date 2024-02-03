@@ -1,16 +1,17 @@
 const express = require('express');
 const orderController = require('../controllers/order.controller');
+const verifyToken = require('../middleware/verifyToken');
 
 const router = express.Router();
 
-router.route('/my-orders/:customerId')
-    .get((orderController.getMyOrders))
+router.route('/my-orders')
+    .get(verifyToken, orderController.getMyOrders)
 
 router.route('/')
-    .get((orderController.getAllOrders))
-    .post((orderController.createNewOrder))
+    .get(orderController.getAllOrders)
+    .post(orderController.createNewOrder)
 
 router.route('/:id')
-    .get((orderController.getOrderById))
+    .get(orderController.getOrderById)
 
 module.exports = router;
