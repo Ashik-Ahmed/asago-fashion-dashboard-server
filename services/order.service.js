@@ -14,3 +14,8 @@ exports.getAllOrdersService = async () => {
     const orders = await Order.find({});
     return orders;
 }
+
+exports.getMyOrdersService = async (customerId) => {
+    const orders = await Order.find({ orderedBy: customerId });
+    return orders;
+}
