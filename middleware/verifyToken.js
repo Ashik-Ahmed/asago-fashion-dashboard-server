@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
         }
 
         const decoded = await promisify(jwt.verify)(token, process.env.ACCESS_TOKEN_SECRET);
-        console.log(decoded);
+
         req.user = decoded;
 
         next();
