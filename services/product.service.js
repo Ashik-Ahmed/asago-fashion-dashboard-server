@@ -23,7 +23,7 @@ exports.getProductByIdService = async (productId) => {
 }
 
 exports.getProductBySlugService = async (slug) => {
-    const product = await Product.findOne({ slug });
+    const product = await Product.findOne({ slug }).populate('inventory', 'stock');
     return product;
 }
 
