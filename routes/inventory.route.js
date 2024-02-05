@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.route('/')
     .post(inventoryController.createNewInventory)
+    .get(inventoryController.getAllInventories)
 
 module.exports = router;
