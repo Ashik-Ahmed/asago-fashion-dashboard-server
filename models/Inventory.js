@@ -11,7 +11,9 @@ const inventorySchema = mongoose.Schema({
         {
             size: {
                 type: String,
+                required: true
             },
+            color: Array,
             quantity: {
                 type: Number,
                 required: true
@@ -20,17 +22,14 @@ const inventorySchema = mongoose.Schema({
                 type: Number,
                 required: true
             },
-            color: {
-                type: String
-            }
+            soldCount: {
+                type: Number
+            },
+            weight: {
+                type: Number
+            },
         }
     ],
-    soldCount: {
-        type: Number
-    },
-    weight: {
-        type: Number
-    },
 },
     {
         timestamps: true

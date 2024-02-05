@@ -22,10 +22,6 @@ const productSchema = mongoose.Schema({
         unique: true,
         required: true
     },
-    // price: {
-    //     type: Number,
-    //     required: true
-    // },
     isActive: {
         type: Boolean,
         default: true,
@@ -54,8 +50,7 @@ const productSchema = mongoose.Schema({
     },
     inventory: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Inventory',
-        reruired: true
+        ref: 'Inventory'
     },
     reviews: [
         {
