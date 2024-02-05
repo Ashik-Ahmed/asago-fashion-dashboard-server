@@ -17,6 +17,7 @@ exports.createNewInventory = async (req, res) => {
             if (product.nModified === 0) {
                 // if product is not updated with inventory then delete the inventory
                 await Inventory.deleteOne({ _id: _id });
+
                 res.status(400).json({
                     status: 'Failed',
                     error: 'Inventory Creation Failed'
