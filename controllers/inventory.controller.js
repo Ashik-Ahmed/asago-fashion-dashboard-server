@@ -1,3 +1,5 @@
+const Inventory = require("../models/Inventory");
+const Product = require("../models/Product");
 const { createNewInventoryService } = require("../services/inventory.service");
 
 exports.createNewInventory = async (req, res) => {
@@ -7,10 +9,26 @@ exports.createNewInventory = async (req, res) => {
         const newInventory = await createNewInventoryService(inventoryData);
 
         if (newInventory?._id) {
-            res.status(201).json({
-                status: 'Success',
-                data: newInventory
-            })
+
+            const { _id } = newInventory;
+            // update the product with inventory data
+            const product = await Product.updateOne({ _id: inventoryData.productId }, { inventory: _id })
+
+            if (product.nModified === 0) {
+                // if product is not updated with inventory then delete the inventory
+                await Inventory.deleteOne({ _id: _id });
+                res.status(400).json({
+                    status: 'Failed',
+                    error: 'Inventory Creation Failed'
+                })
+            }
+            else {
+                res.status(201).json({
+                    status: 'Success',
+                    data: newInventory
+                })
+            }
+
         }
         else {
             res.status(400).json({
