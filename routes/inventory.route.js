@@ -1,10 +1,9 @@
 const express = require('express');
+const inventoryController = require('../controllers/inventory.controller');
 
 const router = express.Router();
 
 router.route('/')
-    .get((req, res) => {
-        res.json("hello inventory api endpoint")
-    })
+    .post(inventoryController.createNewInventory)
 
 module.exports = router;
