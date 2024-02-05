@@ -18,7 +18,7 @@ exports.createNewProductService = async (productData) => {
 }
 
 exports.getProductByIdService = async (productId) => {
-    const product = await Product.findOne({ _id: productId });
+    const product = await Product.findOne({ _id: productId }).populate('inventory', 'stock');
     return product;
 }
 
