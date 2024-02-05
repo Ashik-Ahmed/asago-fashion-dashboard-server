@@ -24,7 +24,13 @@ const inventorySchema = mongoose.Schema({
                 type: String
             }
         }
-    ]
+    ],
+    soldCount: {
+        type: Number
+    },
+    weight: {
+        type: Number
+    },
 },
     {
         timestamps: true

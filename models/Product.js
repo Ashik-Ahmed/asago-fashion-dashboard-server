@@ -49,20 +49,14 @@ const productSchema = mongoose.Schema({
     tags: {
         type: Array
     },
-    soldCount: {
-        type: Number
-    },
-    weight: {
-        type: Number
-    },
     brand: {
         type: String
     },
-    // inventory: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Inventory',
-    //     reruired: true
-    // },
+    inventory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Inventory',
+        reruired: true
+    },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
