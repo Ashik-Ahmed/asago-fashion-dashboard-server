@@ -10,8 +10,8 @@ exports.getOrderByIdService = async (orderId) => {
     return order;
 }
 
-exports.getAllOrdersService = async () => {
-    const orders = await Order.find({});
+exports.getAllOrdersService = async (query) => {
+    const orders = await Order.find(query);
     return orders;
 }
 

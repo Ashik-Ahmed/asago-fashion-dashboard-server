@@ -56,7 +56,8 @@ exports.getOrderById = async (req, res) => {
 
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await getAllOrdersService();
+        const query = req.query;
+        const orders = await getAllOrdersService(query);
 
         if (orders.length > 0) {
             res.status(200).json({
