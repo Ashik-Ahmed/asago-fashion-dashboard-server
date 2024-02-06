@@ -7,10 +7,10 @@ const router = express.Router();
 
 router.route('/')
     .post(verifyToken, authorization("Admin"), categoryController.createNewCategory)
-    .get(categoryController.getAllCategories)
+    .get(verifyToken, categoryController.getAllCategories)
 
 router.route('/:id')
-    .get(categoryController.getCategoryById)
+    .get(verifyToken, categoryController.getCategoryById)
     .delete(verifyToken, authorization("Admin"), categoryController.deleteCategoryById)
 
 module.exports = router;
