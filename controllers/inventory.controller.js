@@ -1,6 +1,6 @@
 const Inventory = require("../models/Inventory");
 const Product = require("../models/Product");
-const { createNewInventoryService, getAllInventoriesService, getInventoryByProductIdService } = require("../services/inventory.service");
+const { createNewInventoryService, getAllInventoriesService, getInventoryByProductSKUService } = require("../services/inventory.service");
 
 exports.createNewInventory = async (req, res) => {
     try {
@@ -71,10 +71,10 @@ exports.getAllInventories = async (req, res) => {
     }
 }
 
-exports.getInventoryByProductId = async (req, res) => {
+exports.getInventoryByProductSKU = async (req, res) => {
     try {
-        const { productId } = req.params;
-        const inventory = await getInventoryByProductIdService(productId);
+        const { productSKU } = req.params;
+        const inventory = await getInventoryByProductSKUService(productSKU);
 
         if (inventory) {
             res.status(200).json({

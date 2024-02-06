@@ -3,8 +3,8 @@ const inventoryController = require('../controllers/inventory.controller');
 
 const router = express.Router();
 
-router.route('/:productId')
-    .get(inventoryController.getInventoryByProductId)
+router.route('/:productSKU')
+    .get(inventoryController.getInventoryByProductSKU)
 
 router.route('/')
     .post(inventoryController.createNewInventory)
