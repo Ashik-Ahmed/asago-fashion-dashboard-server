@@ -9,3 +9,9 @@ exports.getAllInventoriesService = async () => {
     const inventories = await Inventory.find({}).populate('productId', "title");
     return inventories;
 }
+
+exports.getInventoryByProductIdService = async (productId) => {
+    const inventory = await Inventory.findOne({ productId: productId });
+    console.log(inventory);
+    return inventory;
+}

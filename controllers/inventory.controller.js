@@ -1,6 +1,6 @@
 const Inventory = require("../models/Inventory");
 const Product = require("../models/Product");
-const { createNewInventoryService, getAllInventoriesService } = require("../services/inventory.service");
+const { createNewInventoryService, getAllInventoriesService, getInventoryByProductIdService } = require("../services/inventory.service");
 
 exports.createNewInventory = async (req, res) => {
     try {
@@ -60,6 +60,32 @@ exports.getAllInventories = async (req, res) => {
             res.status(400).json({
                 status: 'Failed',
                 error: 'No inventories found'
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            status: 'Failed',
+            error: error.message
+        })
+    }
+}
+
+exports.getInventoryByProductId = async (req, res) => {
+    try {
+        const { productId } = req.params;
+        const inventory = await getInventoryByProductIdService(productId);
+
+        if (inventory) {
+            res.status(200).json({
+                status: 'Success',
+                data: inventory
+            })
+        }
+        else {
+            res.status(400).json({
+                status: 'Failed',
+                error: 'No inventory found'
             })
         }
 
